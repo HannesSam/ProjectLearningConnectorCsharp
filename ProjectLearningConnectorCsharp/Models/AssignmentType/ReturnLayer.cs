@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace ProjectLearningConnectorCsharp.Models.AssignmentType
 {
-    class ArrayOfArrays
+    class ReturnLayer
     {
-        public dynamic[][] Array { get; set; }
+        public string APIKey { get; set; }
+        public string AssignmentId { get; set; }
+        public dynamic Result { get; set; }
     }
 }

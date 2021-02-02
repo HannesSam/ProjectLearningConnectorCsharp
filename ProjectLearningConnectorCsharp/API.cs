@@ -14,15 +14,17 @@ namespace ProjectLearningConnectorCsharp
         private const string BasePath = "https://localhost:44374";
         private readonly HttpClient _client = new HttpClient { BaseAddress = new Uri(BasePath) };
         private readonly string APIKey;
+        private readonly string AssignmentId;
 
-        public Api(string apiKey)
+        public Api(string apiKey, string assignmentId)
         {
             APIKey = apiKey;
+            AssignmentId = assignmentId;
         }
 
-        public async Task<string> GetAssignmentPost(string assignmentId)
+        public async Task<string> GetAssignmentPost()
         {
-            var payload = new { AssignmentId = assignmentId, APIKey = APIKey };
+            var payload = new { AssignmentId, APIKey };
 
             var stringPayload = JsonSerializer.Serialize(payload);
 
@@ -43,9 +45,9 @@ namespace ProjectLearningConnectorCsharp
             return responseContent;
         }
 
-        public async Task<string> SubmitAssignmentPost(dynamic returnValues, string assignmentId)
+        public async Task<string> SubmitAssignmentPost(dynamic returnValues)
         {
-            var payload = new { AssignmentId = assignmentId, APIKey = APIKey, Result = returnValues };
+            var payload = new { AssignmentId, APIKey, Result = returnValues };
 
             var stringPayload = JsonSerializer.Serialize(payload);
 

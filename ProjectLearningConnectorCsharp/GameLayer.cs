@@ -7,26 +7,28 @@ namespace ProjectLearningConnectorCsharp
 {
     class GameLayer
     {
-        private readonly Api _api;
-        public GameLayer(string APIKey)
+        private readonly Api api;
+        private readonly AssignmentManager assignmentManager;
+        public GameLayer(string APIKey, string assignmentId)
         {
-            _api = new Api(APIKey);
+            api = new Api(APIKey, assignmentId);
+            assignmentManager = new AssignmentManager(assignmentId);
         }
 
-        public dynamic StartAssignment(string assignmentId)
+        public dynamic StartAssignment()
         {
-            var test = _api.GetAssignmentPost(assignmentId).Result;
-            var returnValues = AssignmentManager.RunAssignment(test, assignmentId);
+            var assignment = api.GetAssignmentPost().Result;
+            var returnValues = assignmentManager.RunAssignment(assignment);
 
-            var resultOnTests = SubmitAssignment(returnValues, assignmentId);
+            var resultOnTests = SubmitAssignment(returnValues);
 
             return resultOnTests;
         }
 
-        public dynamic SubmitAssignment(dynamic returnValues, string assignmentId)
+        public dynamic SubmitAssignment(dynamic returnValues)
         {
-            var result = _api.SubmitAssignmentPost(returnValues, assignmentId);
-            return null;
+            var result = api.SubmitAssignmentPost(returnValues).Result;
+            return result;
         }
     }
 }

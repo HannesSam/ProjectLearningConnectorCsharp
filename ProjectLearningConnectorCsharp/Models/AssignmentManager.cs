@@ -8,16 +8,20 @@ namespace ProjectLearningConnectorCsharp.Models
     class AssignmentManager
     {
         public string AssignmentId { get; set; }
-        public string APIKey { get; set; }
 
-        public static dynamic RunAssignment(string jsonString, string assignmentId)
+        public AssignmentManager(string assignmentId)
+        {
+            AssignmentId = assignmentId;
+        }
+
+        public dynamic RunAssignment(string jsonString)
         {
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ObjectToInferredTypesConverter());
 
-            dynamic assignmentObject = JsonSerializer.Deserialize<ArrayOfArrays>(jsonString, options);
-            int numberOfParameters = assignmentObject.Array[0].Length;
-            int numberOfTests = assignmentObject.Array.Length;
+            dynamic assignmentObject = JsonSerializer.Deserialize<dynamic[][]>(jsonString, options);
+            int numberOfParameters = assignmentObject[0].Length;
+            int numberOfTests = assignmentObject.Length;
             dynamic[] returnValues = new dynamic[numberOfTests];
 
 
@@ -26,7 +30,7 @@ namespace ProjectLearningConnectorCsharp.Models
             dynamic[] parametersArray = new dynamic[numberOfParameters];
             for (int y = 0; y < numberOfParameters; y++)
                 {
-                parametersArray[y] = assignmentObject.Array[i][y];
+                parametersArray[y] = assignmentObject[i][y];
                 }
                 returnValues[i] = Type.GetType("ProjectLearningConnectorCsharp.Program").GetMethod("Test").Invoke(null, parametersArray);               
             }
@@ -44,6 +48,8 @@ namespace ProjectLearningConnectorCsharp.Models
             //    default:
             //        break;
             //}
+            
+            //IF simple assignment the return is always an ResultArray
             return returnValues;
         }
     }
@@ -57,7 +63,7 @@ namespace ProjectLearningConnectorCsharp.Models
             {
                 JsonTokenType.True => true,
                 JsonTokenType.False => false,
-                JsonTokenType.Number when reader.TryGetInt64(out long l) => l,
+                JsonTokenType.Number when reader.TryGetInt32(out int l) => l,
                 JsonTokenType.Number => reader.GetDouble(),
                 JsonTokenType.String when reader.TryGetDateTime(out DateTime datetime) => datetime,
                 JsonTokenType.String => reader.GetString(),

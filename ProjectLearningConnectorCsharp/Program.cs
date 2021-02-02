@@ -8,21 +8,20 @@ namespace ProjectLearningConnectorCsharp
         //Enter your ApiKey
         private const string ApiKey = "5423";
         //Pick your assignment
-        private const string Assignment = "01-01-01";
+        private const string Assignment = "01-02-01";
 
-        private static readonly GameLayer GameLayer = new GameLayer(ApiKey);
+        private static readonly GameLayer GameLayer = new GameLayer(ApiKey, Assignment);
         static void Main(string[] args)
         {
-            var test = GameLayer.StartAssignment("01-01-01");
-            Console.WriteLine("End");
+            var result = GameLayer.StartAssignment();
+
+            Console.WriteLine(result);
             Console.ReadLine();
-
-
         }
 
-       public static long Test(long numberOne, long numberTwo)
+       public static int Test(int numberOne, int numberTwo)
         {
-            return numberOne + numberTwo;
+            return numberOne * numberTwo;
         }
     }
 }
