@@ -6,9 +6,9 @@ namespace ProjectLearningConnectorCsharp
     {
 
         //Enter your ApiKey
-        private const string ApiKey = "5423";
+        private const string ApiKey = "9159";
         //Pick your assignment
-        private const string Assignment = "01-02-01";
+        private const string Assignment = "601";
 
         private static readonly GameLayer GameLayer = new GameLayer(ApiKey, Assignment);
         static void Main(string[] args)
@@ -19,9 +19,10 @@ namespace ProjectLearningConnectorCsharp
             Console.ReadLine();
         }
 
-       public static int Test(int numberOne, int numberTwo)
+       public static int[] Test(int[] arrayOne, int[] arrayTwo)
         {
-            return numberOne * numberTwo;
+            int[] test = new int[arrayOne.Length];
+            return test;
         }
     }
 }

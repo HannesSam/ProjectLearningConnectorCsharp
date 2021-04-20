@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace ProjectLearningConnectorCsharp
 {
@@ -17,8 +18,9 @@ namespace ProjectLearningConnectorCsharp
 
         public dynamic StartAssignment()
         {
-            var assignment = api.GetAssignmentPost().Result;
-            var returnValues = assignmentManager.RunAssignment(assignment);
+            string progTaskString = api.GetAssignment().Result;
+            IncomingProgTask progTask = JsonSerializer.Deserialize<IncomingProgTask>(progTaskString);
+            var returnValues = assignmentManager.RunAssignment(progTask.IncomingAssignment.ToString());
 
             var resultOnTests = SubmitAssignment(returnValues);
 
@@ -27,7 +29,7 @@ namespace ProjectLearningConnectorCsharp
 
         public dynamic SubmitAssignment(dynamic returnValues)
         {
-            var result = api.SubmitAssignmentPost(returnValues).Result;
+            var result = api.SubmitAssignment(returnValues).Result;
             return result;
         }
     }
