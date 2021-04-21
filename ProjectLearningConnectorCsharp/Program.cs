@@ -10,7 +10,7 @@ namespace ProjectLearningConnectorCsharp
         //Pick your assignment
         private const string Assignment = "601";
 
-        private static readonly GameLayer GameLayer = new GameLayer(ApiKey, Assignment);
+        private static readonly GameLayer GameLayer = new(ApiKey, Assignment);
         static void Main(string[] args)
         {
             var result = GameLayer.StartAssignment();
@@ -22,6 +22,8 @@ namespace ProjectLearningConnectorCsharp
        public static int[] Test(int[] arrayOne, int[] arrayTwo)
         {
             int[] test = new int[arrayOne.Length];
+            test[0] = 12;
+            test[1] = 26;
             return test;
         }
     }

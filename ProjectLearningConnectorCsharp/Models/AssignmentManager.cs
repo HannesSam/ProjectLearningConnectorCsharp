@@ -45,14 +45,21 @@ namespace ProjectLearningConnectorCsharp.Models
                         JsonElement[] result = JsonSerializer.Deserialize<JsonElement[]>(value.ToString(), Options);
 
                         dynamic[] arrayValues = new dynamic[result.Length];
+
                         for (int p = 0; p < result.Length; p++)
                         {
                             arrayValues[p] = DeserializeValueType(result[p]);
-                        } 
+                        }
 
-                        var test = arrayValues.GetType();
-                        var test2 = arrayValues[1].GetType();
-                        parametersArray[y] = arrayValues;
+                        if (arrayValues[i] is Int32)
+                        {
+                            parametersArray[y] = Array.ConvertAll(arrayValues, (o) => (int)o);
+                        }
+                        else
+                        {
+                            parametersArray[y] = arrayValues;
+                        }
+
                     }
                     else
                     {
