@@ -1,5 +1,4 @@
-﻿using ProjectLearningConnectorCsharp.Models.AssignmentType;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -17,12 +16,8 @@ namespace ProjectLearningConnectorCsharp.Models
             AssignmentId = assignmentId;
         }
 
-        public dynamic RunAssignment(string jsonString)
+        public static dynamic RunAssignment(string jsonString)
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new ObjectToInferredTypesConverter());
-
-
             List<List<dynamic>> incomingResultValues = DeserializeValueTypeArray(JsonDocument.Parse(jsonString));
 
             int numberOfTests = incomingResultValues.Count;
@@ -66,7 +61,7 @@ namespace ProjectLearningConnectorCsharp.Models
                         parametersArray[y] = value;
                     }
                 }
-                var returnValue = Type.GetType("ProjectLearningConnectorCsharp.Program").GetMethod("Test").Invoke(null, parametersArray);
+                var returnValue = Type.GetType("ProjectLearningConnectorCsharp.SolutionArea").GetMethod("Start").Invoke(null, parametersArray);
 
                 if (returnValue is not Array)
                 {

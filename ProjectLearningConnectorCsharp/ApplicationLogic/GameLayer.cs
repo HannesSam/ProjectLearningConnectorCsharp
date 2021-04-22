@@ -20,7 +20,7 @@ namespace ProjectLearningConnectorCsharp
         {
             string progTaskString = api.GetAssignment().Result;
             IncomingProgTask progTask = JsonSerializer.Deserialize<IncomingProgTask>(progTaskString);
-            var returnValues = assignmentManager.RunAssignment(progTask.IncomingAssignment.ToString());
+            var returnValues = AssignmentManager.RunAssignment(progTask.IncomingAssignment.ToString());
 
             var resultOnTests = SubmitAssignment(returnValues);
 
