@@ -61,7 +61,7 @@ namespace ProjectLearningConnectorCsharp.Models
                         parametersArray[y] = value;
                     }
                 }
-                var returnValue = Type.GetType("ProjectLearningConnectorCsharp.SolutionArea").GetMethod("Start").Invoke(null, parametersArray);
+                var returnValue = Type.GetType("ProjectLearningConnectorCsharp.WriteCodeHere").GetMethod("Start").Invoke(null, parametersArray);
 
                 if (returnValue is not Array)
                 {
