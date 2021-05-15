@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectLearningConnectorCsharp
 {
-    class SolutionArea
+    class WriteCodeHere
     {
         //Enter your ApiKey
         public static string ApiKey = "9159";

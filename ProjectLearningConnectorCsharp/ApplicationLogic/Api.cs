@@ -11,7 +11,7 @@ namespace ProjectLearningConnectorCsharp
 {
     class Api
     {
-        private const string BasePath = "https://localhost:44302";
+        private const string BasePath = "https://proglearning.azurewebsites.net/";
         private readonly HttpClient _client = new() { BaseAddress = new Uri(BasePath) };
         private readonly string ApiKey;
         private readonly string ProgTaskId;

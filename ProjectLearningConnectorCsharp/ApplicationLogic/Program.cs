@@ -6,7 +6,7 @@ namespace ProjectLearningConnectorCsharp
     {
         static void Main()
         {
-            GameLayer GameLayer = new(SolutionArea.ApiKey, SolutionArea.TaskID);
+            GameLayer GameLayer = new(WriteCodeHere.ApiKey, WriteCodeHere.TaskID);
             var result = GameLayer.StartAssignment();
 
             Console.WriteLine(result);
